@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -59,5 +60,18 @@ public class StarShapedCardView extends View{
 
         }
         return true;
+    }
+    private class ColorFilterRect {
+        private float hFilter = 0;
+        public void draw(Canvas canvas) {
+            canvas.save();
+            canvas.translate(w/2,h/2);
+            canvas.rotate(90*direction);
+            canvas.drawRect(new RectF(-w/2,-h/2,w/2,-h/2+hFilter),paint);
+            canvas.restore();
+        }
+        public void update(float factor) {
+            hFilter = h*factor;
+        }
     }
 }
