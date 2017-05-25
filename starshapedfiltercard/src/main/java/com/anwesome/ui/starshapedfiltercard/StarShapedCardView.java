@@ -22,6 +22,7 @@ public class StarShapedCardView extends View{
     private int time = 0,w,h,direction=0,color = Color.parseColor("#0097A7");
     private Bitmap bitmap;
     private ColorFilterRect colorFilterRect;
+    private AnimationHandler animationHandler;
     public static final int DIRECTION_UP = 0,DIRECTION_RIGHT = 1,DIRECTION_DOWN = 2 ,DIRECTION_LEFT = 3;
     public StarShapedCardView(Context context,Bitmap bitmap,int color,int direction) {
         super(context);
@@ -30,6 +31,7 @@ public class StarShapedCardView extends View{
         this.direction = direction;
     }
     public void update(float factor) {
+        colorFilterRect.update(factor);
         postInvalidate();
     }
     public void onDraw(Canvas canvas) {
@@ -38,6 +40,7 @@ public class StarShapedCardView extends View{
             h = canvas.getHeight();
             bitmap = Bitmap.createScaledBitmap(bitmap,4*w/5,4*h/5,true);
             colorFilterRect = new ColorFilterRect();
+            animationHandler = new AnimationHandler();
         }
         int r1 = 2*w/5,r2 = w/6;
         canvas.save();
@@ -67,7 +70,7 @@ public class StarShapedCardView extends View{
     }
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN) {
-
+            animationHandler.start();
         }
         return true;
     }
