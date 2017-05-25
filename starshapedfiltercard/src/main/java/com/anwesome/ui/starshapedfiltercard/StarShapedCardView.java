@@ -77,6 +77,7 @@ public class StarShapedCardView extends View{
     private class ColorFilterRect {
         private float hFilter = 0;
         public void draw(Canvas canvas) {
+            paint.setColor(Color.argb(150,Color.red(color),Color.green(color),Color.blue(color)));
             canvas.save();
             canvas.rotate(90*direction);
             canvas.drawRect(new RectF(-w/2,-h/2,w/2,-h/2+hFilter),paint);
