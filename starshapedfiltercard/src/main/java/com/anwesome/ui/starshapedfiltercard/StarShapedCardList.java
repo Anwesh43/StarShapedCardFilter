@@ -20,9 +20,9 @@ public class StarShapedCardList {
         listLayout = new ListLayout(activity);
         scrollView.addView(listLayout,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
-    public void addCard(Bitmap bitmap,int color,int dir) {
+    public void addCard(Bitmap bitmap,int color,int dir,OnSelectionChangeListener onSelectionChangeListener) {
         if(!isShown) {
-            listLayout.addCard(bitmap, color, dir);
+            listLayout.addCard(bitmap, color, dir,onSelectionChangeListener);
         }
     }
     public void show() {

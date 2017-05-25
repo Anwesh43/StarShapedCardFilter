@@ -24,6 +24,10 @@ public class StarShapedCardView extends View{
     private ColorFilterRect colorFilterRect;
     private AnimationHandler animationHandler;
     public static final int DIRECTION_UP = 0,DIRECTION_RIGHT = 1,DIRECTION_DOWN = 2 ,DIRECTION_LEFT = 3;
+    private OnSelectionChangeListener onSelectionChangeListener;
+    public void setOnSelectionChangeListener(OnSelectionChangeListener onSelectionChangeListener) {
+        this.onSelectionChangeListener = onSelectionChangeListener;
+    }
     public StarShapedCardView(Context context,Bitmap bitmap,int color,int direction) {
         super(context);
         this.bitmap = bitmap;
@@ -97,11 +101,12 @@ public class StarShapedCardView extends View{
         }
         public void onAnimationEnd(Animator animator) {
             if(isAnimating) {
-                if(dir == 0) {
-
-                }
-                else {
-
+                if(onSelectionChangeListener != null) {
+                    if (dir == 0) {
+                        onSelectionChangeListener.onSelect();
+                    } else {
+                        onSelectionChangeListener.onUnSelect();
+                    }
                 }
                 dir = dir == 0?1:0;
                 isAnimating = false;

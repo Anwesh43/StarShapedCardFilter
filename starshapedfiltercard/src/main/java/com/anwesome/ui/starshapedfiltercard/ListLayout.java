@@ -29,9 +29,10 @@ public class ListLayout  extends ViewGroup{
             viewSize = w/2;
         }
     }
-    public void addCard(Bitmap bitmap,int color,int direction) {
+    public void addCard(Bitmap bitmap,int color,int direction,OnSelectionChangeListener onSelectionChangeListener) {
         StarShapedCardView starShapedCardView = new StarShapedCardView(getContext(),bitmap,color,direction);
         addView(starShapedCardView,new LayoutParams(viewSize,viewSize));
+        starShapedCardView.setOnSelectionChangeListener(onSelectionChangeListener);
         requestLayout();
     }
     public void onMeasure(int wspec,int hspec) {
