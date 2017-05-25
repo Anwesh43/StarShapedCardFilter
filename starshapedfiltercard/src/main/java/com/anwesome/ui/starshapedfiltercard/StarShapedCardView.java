@@ -18,17 +18,22 @@ public class StarShapedCardView extends View{
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int time = 0,w,h,direction=0,color = Color.parseColor("#0097A7");
     private Bitmap bitmap;
+    private ColorFilterRect colorFilterRect;
     public StarShapedCardView(Context context,Bitmap bitmap,int color,int direction) {
         super(context);
         this.bitmap = bitmap;
         this.color = color;
         this.direction = direction;
     }
+    public void update(float factor) {
+        postInvalidate();
+    }
     public void onDraw(Canvas canvas) {
         if(time == 0) {
             w = canvas.getWidth();
             h = canvas.getHeight();
             bitmap = Bitmap.createScaledBitmap(bitmap,4*w/5,4*h/5,true);
+            colorFilterRect = new ColorFilterRect();
         }
         int r1 = 2*w/5,r2 = w/6;
         canvas.save();
@@ -52,6 +57,7 @@ public class StarShapedCardView extends View{
         }
         canvas.clipPath(path);
         canvas.drawBitmap(bitmap,-bitmap.getWidth()/2,-bitmap.getHeight()/2,paint);
+        colorFilterRect.draw(canvas);
         canvas.restore();
         time++;
     }
@@ -65,7 +71,6 @@ public class StarShapedCardView extends View{
         private float hFilter = 0;
         public void draw(Canvas canvas) {
             canvas.save();
-            canvas.translate(w/2,h/2);
             canvas.rotate(90*direction);
             canvas.drawRect(new RectF(-w/2,-h/2,w/2,-h/2+hFilter),paint);
             canvas.restore();
