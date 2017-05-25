@@ -23,6 +23,7 @@ public class ListLayout  extends ViewGroup{
         Display display = displayManager.getDisplay(0);
         if(display != null) {
             Point size = new Point();
+            display.getRealSize(size);
             w = size.x;
             h = size.y;
             viewSize = w/2;
