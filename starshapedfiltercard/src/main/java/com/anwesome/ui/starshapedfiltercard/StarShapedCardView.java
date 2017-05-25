@@ -19,6 +19,7 @@ public class StarShapedCardView extends View{
     private int time = 0,w,h,direction=0,color = Color.parseColor("#0097A7");
     private Bitmap bitmap;
     private ColorFilterRect colorFilterRect;
+    public static final int DIRECTION_UP = 0,DIRECTION_RIGHT = 1,DIRECTION_DOWN = 2 ,DIRECTION_LEFT = 3;
     public StarShapedCardView(Context context,Bitmap bitmap,int color,int direction) {
         super(context);
         this.bitmap = bitmap;
